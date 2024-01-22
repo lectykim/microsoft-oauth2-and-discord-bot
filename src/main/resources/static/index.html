@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Login</title>
+</head>
+<body>
+<h1>Click the button to login</h1>
+
+<!-- 버튼을 클릭하면 JavaScript 함수를 호출하여 URL로 GET 요청을 보냄 -->
+<button type="button" onclick="redirectToMicrosoftLogin()">Login to Microsoft</button>
+<button type="button" onclick="xboxLogin()">Login to Microsoft</button>
+
+<script>
+    function xboxLogin(){
+        const loginUrl = " https://xbl.io/app/auth/c40649bf-dfcc-9755-f890-ca179c96cf82";
+        window.location.assign(loginUrl);
+    }
+
+    function redirectToMicrosoftLogin() {
+        // 필요한 파라미터 설정
+        const tenantId = '<tanant-id>';
+        const clientId = '<client-id>';
+        const responseType = 'code';
+        const scope = 'https://graph.microsoft.com/.default offline_access';
+        const redirectUrl = 'https://localhost:8080/login/oauth2/code/azure-dev';
+        const urlParams = new URLSearchParams(window.location.search);
+        const idValue = urlParams.get("userId");
+
+        console.log(idValue);
+
+        // 요청할 URL 조립
+        const loginUrl = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/authorize?client_id=${clientId}&response_type=${responseType}&scope=${scope}&redirect_url=${redirectUrl}&state=${idValue}`;
+        window.location.assign(loginUrl);
+
+
+    }
+</script>
+</body>
+</html>

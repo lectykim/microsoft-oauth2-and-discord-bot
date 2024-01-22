@@ -1,0 +1,16 @@
+server:
+  ssl:
+    enabled: true
+    key-store: keystore.p12
+    key-store-password: password
+    key-store-type: PKCS12
+    key-alias: spring
+  port: 8080
+  servlet:
+    encoding:
+      force-response: true
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
